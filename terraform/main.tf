@@ -137,3 +137,30 @@ resource "aws_iam_instance_profile" "ecr_profile" {
   role = aws_iam_role.ecr_role.name
 }
 
+
+aws iam put-role-policy \
+  --role-name github-access-to-aws \
+  --policy-name M3-ECR-Push \
+  --policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "ecr:GetAuthorizationToken"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:CompleteLayerUpload",
+          "ecr:InitiateLayerUpload",
+          "ecr:PutImage",
+          "ecr:UploadLayerPart"
+        ],
+        "Resource": "arn:aws:ecr:ap-south-1:896305834488:repository/m3-production-cicd"
+      }
+    ]
+  }'

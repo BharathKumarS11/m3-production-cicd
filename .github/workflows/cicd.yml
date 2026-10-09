@@ -197,7 +197,6 @@ jobs:
           docker push \
             ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
 
-
   # ==========================================
   # TASK 10 & 11 - EC2 DEPLOYMENT
   # ==========================================
